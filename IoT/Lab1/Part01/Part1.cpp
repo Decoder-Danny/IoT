@@ -152,6 +152,7 @@ int main()
                 humidity->humidityRead(imuData);
             }
             
+            //Define roll pitch and yaw values to put into lists
             RTFLOAT roll = imuData.fusionPose.x() * RTMATH_RAD_TO_DEGREE;
             RTFLOAT pitch = imuData.fusionPose.y() * RTMATH_RAD_TO_DEGREE;
             RTFLOAT yaw = imuData.fusionPose.z() * RTMATH_RAD_TO_DEGREE;
@@ -198,16 +199,6 @@ int main()
                 cout << "----------------------------------------------"<<endl;
                 printf("\n");
                 
-            
-                /* UNCOMMENT IF YOU WANT TO SEE EACH VALUE IN THE CURRENT 10 VALUE BUFFER PER ITERATION
-                cout << "Pressure Readings:  " << endl;
-                * 
-                for (auto iterator = pressureBuffer.begin(); iterator != pressureBuffer.end(); iterator ++ ) {
-                    cout << "Pressure Reading " << sampleNumber<< ": " << *iterator << endl;
-                    sampleNumber++;
-                }
-                */
-                
                 //KEEP THE BUFFERS TO ONLY THE LATEST 10 READINGS
                 if (pressureBuffer.size() > 10) {
                     pressureBuffer.pop_back();
@@ -233,12 +224,15 @@ int main()
                     pressureSum+= *iterator;
                     
                 }
+                
+                //CHECK TO SEE IF WE ARE AT 10 READINGS YET
                 if (areYouOnTenYet) {
                     pressureAverage = pressureSum/10; //CALCULATE AVERAGE
                     cout << "Average pressure of last 10 trials: " << pressureAverage <<endl;
                     
                 
                 }
+                //LET THE USER KNOW THAT THERE ARE NOT ENOUGH READINGS FOR AVERAGE YET
                 if (areYouOnTenYet == false) {
                     cout << "Not enough data for average yet, please standby until 10 seconds" << endl;
                 }
