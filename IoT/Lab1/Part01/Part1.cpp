@@ -172,12 +172,13 @@ int main()
             
                 cout<< "CURRENT DATA FROM SENSE HAT TRIAL: "<< count << endl;
                 cout << "----------------------------------------------"<<endl;
-                printf("Sample rate %d: %s\n", sampleRate, RTMath::displayDegrees("", imuData.fusionPose));
+                printf("Sample rate %d: %s\n", sampleRate, RTMath::displayDegrees("Gryoscope in degrees", imuData.fusionPose));
 
                 if (pressure != NULL) 
 				{
-                    printf("Pressure: %4.1f, temperature: %4.1f",
-                           imuData.pressure, imuData.temperature);
+                    printf("Pressure: %4.1f kPa, temperature: %4.1f C",
+                           imuData.pressure/10, imuData.temperature);
+                           
                 }
                 
                 //ADD VALUES TO THE LIST**************************
@@ -192,7 +193,7 @@ int main()
                 
                 if (humidity != NULL) 
 				{
-                    printf(", humidity: %4.1f",
+                    printf(", humidity: %4.1f %",
                            imuData.humidity);
                 }
                 printf("\n");
@@ -228,7 +229,7 @@ int main()
                 //CHECK TO SEE IF WE ARE AT 10 READINGS YET
                 if (areYouOnTenYet) {
                     pressureAverage = pressureSum/10; //CALCULATE AVERAGE
-                    cout << "Average pressure of last 10 trials: " << pressureAverage <<endl;
+                    cout << "Average pressure of last 10 trials: " << pressureAverage/10 << " kPa" <<endl;
                     
                 
                 }
@@ -248,7 +249,7 @@ int main()
         
                 if (areYouOnTenYet) {
                     humidityAverage = humiditySum/10; //CALCULATE AVERAGE
-                    cout << "Average humidity of last 10 trials: " << humidityAverage <<endl;
+                    cout << "Average humidity of last 10 trials: " << humidityAverage << " %"<<endl;
                 
                 }
                 
@@ -264,7 +265,7 @@ int main()
         
                 if (areYouOnTenYet) {
                     temperatureAverage = temperatureSum/10; //CALCULATE AVERAGE
-                    cout << "Average temperature of last 10 trials: " << temperatureAverage <<endl;
+                    cout << "Average temperature of last 10 trials: " << temperatureAverage << " C" << endl;
                 
                 }
                 
@@ -293,9 +294,9 @@ int main()
                     yawAverage = yawSum/10; //CALCULATE AVERAGE
                     
                     cout << "Average IMU Readings of last 10 trials" <<endl;
-                    cout << "Roll: " << rollAverage << endl;
-                    cout << "Pitch: " << pitchAverage << endl;
-                    cout << "Yaw: " << yawAverage << endl;
+                    cout << "Roll: " << rollAverage << " degrees"<< endl;
+                    cout << "Pitch: " << pitchAverage << " degrees"<< endl;
+                    cout << "Yaw: " << yawAverage << " degrees"<< endl;
                 }
                 
                 
