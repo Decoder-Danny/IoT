@@ -193,7 +193,7 @@ int main()
                 
                 if (humidity != NULL) 
 				{
-                    printf(", humidity: %4.1f %",
+                    printf(", humidity: %4.1f percent",
                            imuData.humidity);
                 }
                 printf("\n");
